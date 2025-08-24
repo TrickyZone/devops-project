@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+  namespace: todo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: todo-app
+          image: wruiwr/todo-postgres:1.0  # replace with your image
+          env:
+            - name: DATABASE_HOST
+              value: postgres  # matches postgres service name
+            - name: DATABASE_USER
+              value: postgres
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-service
+  namespace: todo-app
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-app
+  ports:
+    - port: 80
+      targetPort: 8080
