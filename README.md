@@ -20,7 +20,7 @@ This is a full-stack application built with:
 ├── README.md
 └── .gitignore
 
-````
+```md
 
 ---
 
@@ -39,11 +39,10 @@ This is a full-stack application built with:
 
 > All services (frontend, backend, and DB) run inside Docker containers.
 
-### 📦 Step 1: Build and Start All Services
 
 ```bash
 docker-compose up --build
-````
+```
 
 This will:
 
@@ -111,7 +110,6 @@ DB_NAME=todo_db
 * PostgreSQL runs as a service in Docker and is accessed via internal Docker networking (`postgres` is the hostname in `docker-compose`).
 * All services are automatically restarted if they crash (unless configured otherwise).
 
-
 ---
 
 ## 🤝 Contributing
@@ -124,11 +122,11 @@ Contributions are welcome! Please open issues or submit a pull request.
 
 This project is licensed under [MIT](LICENSE).
 
-````
+```md
 
 ---
 
 Just copy everything from the opening ```markdown to the ending ```, paste into your `README.md` file, and you’re good to go!
 
 If you want, I can also help you generate a `docker-compose.yml` or `.env` templates next!
-````
+```
