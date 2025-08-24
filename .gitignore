@@ -1,0 +1,77 @@
+# ============================
+# Node.js
+# ============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# ============================
+# Angular
+# ============================
+dist/
+.angular/
+out-tsc/
+*.log
+*.tsbuildinfo
+
+# ============================
+# Environment files
+# ============================
+.env
+.env.*  # For .env.development, .env.production, etc.
+
+# ============================
+# Docker
+# ============================
+Dockerfile.dev
+docker-compose.override.yml
+.docker/
+docker-data/
+*.pid
+
+# ============================
+# OS/System Files
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# VSCode/Editor Settings
+# ============================
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ============================
+# Coverage & Testing
+# ============================
+coverage/
+nyc_output/
+jest-coverage/
+test-results/
+
+# ============================
+# Miscellaneous
+# ============================
+tmp/
+temp/
+logs/
+*.log
+*.bak
+*.swp
+*.swo
+
+# ============================
+# Git
+# ============================
+.gitmodules
+
+# ============================
+# Build output (optional if you use custom build folders)
+# ============================
+build/
+node_modules/
