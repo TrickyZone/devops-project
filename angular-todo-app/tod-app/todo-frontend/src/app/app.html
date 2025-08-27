@@ -1,0 +1,55 @@
+<nav class="navbar">
+  <h2>🌟 My Kubernetes Todo Website 🌟</h2>
+</nav>
+
+<main class="main-content">
+  <section class="todo-container">
+    <h1>Todo Manager</h1>
+
+    <!-- Add Todo -->
+    <div class="input-section">
+      <input [(ngModel)]="newTodo" placeholder="Enter a todo" />
+      <button (click)="addTodo()">➕ Add</button>
+    </div>
+
+    <!-- Todo List -->
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos; let i = index"
+          [class.completed]="todo.status === 'completed'"
+          [class.rejected]="todo.status === 'rejected'"
+          [class.pending]="todo.status === 'pending'">
+
+        <!-- Text + Created At -->
+        <div class="todo-text">
+          <span>{{ todo.text }}</span>
+          <small>🕒 {{ todo.created_at | date:'short' }}</small>
+        </div>
+
+        <!-- ✅ Status Dropdown -->
+        <div class="status-dropdown">
+          <button class="status-btn" (click)="toggleStatusDropdown(todo)">
+            {{ todo.activeDropdownStatus | titlecase }} 
+            <span [class.rotate]="todo.showStatus">⬇</span>
+          </button>
+
+          <!-- Only show options for this todo -->
+          <ul *ngIf="todo.showStatus" class="status-options">
+            <li *ngFor="let s of statuses" (click)="updateStatus(todo, s)">
+              {{ s | titlecase }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- ❌ Delete -->
+        <button class="delete-btn" (click)="removeTodo(i)">🗑</button>
+      </li>
+    </ul>
+
+    <!-- Clear All -->
+    <button *ngIf="todos.length > 0" class="clear-btn" (click)="clearTodos()">Clear All</button>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Made with ❤️ while learning Kubernetes & Docker</p>
+</footer>

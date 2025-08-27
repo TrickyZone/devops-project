@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: todo-postgres
+    environment:
+      POSTGRES_DB: todo_app
+      POSTGRES_USER: todo_user
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./todo-backend
+    container_name: todo-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: todo_user
+      DB_PASSWORD: password123
+      DB_NAME: todo_app
+      DB_PORT: 5432
+    depends_on:
+      - db
+
+  frontend:
+    build: ./todo-frontend
+    container_name: todo-frontend
+    ports:
+      - "4200:80"   # map container’s port 80 -> localhost:4200
+    depends_on:
+      - backend
+
+
+volumes:
+  pgdata:
+

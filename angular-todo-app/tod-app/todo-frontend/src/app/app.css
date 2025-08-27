@@ -1,0 +1,210 @@
+/* Global */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #74ebd5, #9face6);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  background: #4db6ac;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px;
+}
+
+/* Todo Container */
+.todo-container {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 450px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.todo-container h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input Section */
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #74ebd5;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #74ebd5;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #4db6ac;
+}
+
+/* Todo List */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.todo-list li:hover {
+  transform: scale(1.02);
+}
+
+.todo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.todo-list small {
+  font-size: 11px;
+  color: #777;
+}
+
+/* Completed / Rejected / Pending */
+.completed span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+li.completed .status-btn { background-color: #16a34a; }
+li.rejected .status-btn { background-color: #dc2626; }
+li.pending .status-btn { background-color: #facc15; color: #333; }
+
+/* Delete Button */
+.delete-btn {
+  background: #e57373;
+}
+
+.delete-btn:hover {
+  background: #c62828;
+}
+
+/* Clear All Button */
+.clear-btn {
+  margin-top: 15px;
+  background: #ff9800;
+}
+
+.clear-btn:hover {
+  background: #ef6c00;
+}
+
+/* Footer */
+.footer {
+  background: #333;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Status Dropdown */
+.status-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1; /* default stacking for dropdown */
+}
+
+.status-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-btn:hover {
+  background-color: #2563eb;
+}
+
+.status-btn span.rotate {
+  display: inline-block;
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+/* Dropdown Options */
+.status-options {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideDown 0.3s forwards;
+  z-index: 100; /* ensures current dropdown is on top */
+  min-width: 100%; /* match button width */
+}
+
+.status-options li {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.status-options li:hover {
+  background-color: #f3f4f6;
+}
+
+/* Slide animation for dropdown */
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
