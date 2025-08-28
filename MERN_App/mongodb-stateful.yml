@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: mongodc-sts
+  annotations:
+    description: This is only for the mongodb stateful set
+  labels:
+    app: mongodb-stateful
+spec:
+  serviceName: mongo-service   # <-- required
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongodb-stateful
+  template:
+    metadata:
+      labels:
+        app: mongodb-stateful
+    spec:
+      containers:
+        - name: mongodb-app
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret   # <-- fixed
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:    
+                secretKeyRef:
+                  name: mongo-secret   # <-- fixed
+                  key: password
+
+
+
+
+
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata: 
+#   name: mongodc-sts
+#   annotations:
+#     description: This is only for the mongodb stateful set
+#   labels:
+#     app: mongodb-stateful
+# spec:
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: mongodb-stateful
+#   template:
+#     metadata:
+#       labels:
+#         app: mongodb-stateful
+#     spec:
+#       containers:
+#         - name: mongodb-app
+#           image: mongo:latest
+#           ports:
+#             - containerPort: 27017
+#           env:
+#             - name: MONGO_INITDB_ROOT_USERNAME
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: mongo-secret
+#                   key: username
+#             - name: MONGO_INITDB_ROOT_PASSWORD
+#               valueFrom:    
+#                 secretKeyRef:
+#                   name: mongo-secert
+#                   key: password
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+  labels:
+    app: mongodb-stateful
+spec:
+  clusterIP: None   # <-- headless service for StatefulSet
+  selector:
+    app: mongodb-stateful
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
