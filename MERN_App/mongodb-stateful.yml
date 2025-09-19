@@ -26,12 +26,12 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret   # <-- fixed
+                  name: mongo-secret
                   key: username
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:    
                 secretKeyRef:
-                  name: mongo-secret   # <-- fixed
+                  name: mongo-secret
                   key: password
 
 
@@ -82,7 +82,7 @@ metadata:
   labels:
     app: mongodb-stateful
 spec:
-  clusterIP: None   # <-- headless service for StatefulSet
+  clusterIP: None
   selector:
     app: mongodb-stateful
   ports:

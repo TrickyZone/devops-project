@@ -8,7 +8,7 @@ metadata:
   labels: 
     app: mongo-exp
 spec: 
-  replicas: 1   # 1 is enough, you can scale if needed
+  replicas: 1
   selector:
     matchLabels:
       app: mongo-exp
